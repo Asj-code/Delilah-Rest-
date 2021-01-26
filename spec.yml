@@ -1,0 +1,241 @@
+Registrar un usuario (sing-up)
+> Request
+POST /users
+
+body:{
+    is_admin: bool()
+    username: string(),
+    name: string(),
+    last_name: string(),
+    email: string(),
+    phone_number: integer(),
+    address: string(),
+    password: string()
+}
+
+> Response 
+{
+    "id": integer()
+}
+
+
+Obtener todos los usuarios
+> Request
+GET /users
+
+> Response 
+[
+    {
+        username: string(),
+        name: string(), 
+        last_name: string(),
+        email: string(),
+        phone_number: integer(),
+        address: string(),
+        id_user: integer()
+    },
+]
+
+
+
+
+Obtener un usuario por id
+> Request
+GET /users/{id_user}  
+
+> Response
+{
+    username: string(),
+    name: string(), 
+    last_name: string(),
+    email: string(),
+    phone_number: integer(),
+    address: string(),
+    id_user: integer()
+}
+
+
+
+Loguear un usuario (log-in) 
+>Request
+POST /users/login
+
+body:
+{
+    username: string(),
+    password: string()
+}
+
+
+> Response 
+{
+    "token": string(),
+}
+
+
+
+Crear productos (explorador) 
+>Request
+POST /products
+
+body:
+{
+    image_url: string(),
+    name: string(),
+    price: integer()
+}
+
+
+> Response
+{
+    “producto creado correctamente”
+    "id": integer()       no estan las vistas de productos creados ni la del detalle del producto creado
+}
+
+
+
+Obtener todos los productos
+>Request
+GET /products
+
+> Response 
+[
+    {
+        image_url: string(),
+        name: string(),
+        price: integer(),
+        id_product: integer()
+    },
+]
+
+
+
+Obtener un producto por id
+>Request
+GET /products/{id_product}
+
+> Response
+
+{
+    image_url: string(),
+    name: string(),
+    price: integer(),
+    id_product: integer()
+}
+
+
+
+Modificar un producto
+>Request
+PUT /products/{id_product}
+
+body:
+{
+    image_url: string(),
+    name: string(),
+    price: integer()
+}
+
+> Response
+code: 200
+{
+“message”: “producto modificado con exito”
+}
+
+
+
+Eliminar un producto
+>Request
+DELETE /products/{id_product}
+
+> Response
+code: 200
+{
+“message”: “producto eliminado con exito”
+}
+
+
+
+Crear una orden
+>Request
+POST /orders
+
+body: 
+{   
+    address: string(),
+    payment_method: string(), 
+    products: [
+        {
+            id_product: integer(),
+	quantity: integer(),
+	subtotal: integer()
+        },
+    ]
+    total: integer()
+}
+
+> Response {
+    id_order: integer(),
+    order_state: string(),
+   created_at: timestamp()
+}
+
+
+
+Obtener todas las ordenes
+>Request
+GET /orders
+
+> Response
+[
+    {   
+        address: string(),
+        payment_method: string(), 
+        products: [
+            {
+                id_product: integer()
+            },
+        ]
+        id_order: integer(),
+        order_state: string(),
+        order_time: timestamp()       
+    },
+]
+
+
+
+
+Obtener una orden 
+>Request
+GET /orders/{id_order}
+
+> Response
+{   
+    address: string(),
+    payment_method: string(), 
+    products: [
+        {
+            id_product: integer()
+        },
+    ]
+    id_order: integer(),
+    order_state: string(),
+    order_time: timestamp()       
+}
+
+
+Obtener todos los productos de una orden
+>Request
+GET /orders/{id_order}/products 
+
+> Response 
+{
+    products: [
+        {
+            id_product: integer(),
+image_url: string(),
+    	name: string(),
+   	 price: integer()
+        },
+    ]
+}
